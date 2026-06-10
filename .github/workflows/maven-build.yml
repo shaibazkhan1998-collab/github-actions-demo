@@ -25,3 +25,12 @@ jobs:
         with:
           name: application-jar
           path: target/*.jar
+           
+      - name: Copy WAR to Tomcat Server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          source: "target/*.war"
+          target: "/opt/tomcat/webapps/"      
